@@ -1,5 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
+import Welcome from "./components/Welcome.jsx"
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import ReactDOM from 'react-dom';
+
+ReactDOM(
+  <BrowserRouter>
+    <Routes>
+      <Route path='/welcome' element={<Welcome name="User"/>} />
+      <Route path='/MovieCard/addCard' element={<MovieCard name="addCard" />} />
+      <Route path='/MovieCard/listCard' element={<MovieCard name="listCard"  />} />
+      <Route path='/MoviesAdd' element={<MoviesAdd />} />
+      <Route path='/MoviesList' element={<MoviesList />} />
+    </Routes>
+  </BrowserRouter>,
+  document.getElementById('root')
+);
 
 function App() {
   return (
