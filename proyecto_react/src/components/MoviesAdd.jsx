@@ -5,34 +5,34 @@ import firebaseConfig from '../config/config';
 
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
-  }
+}
   
-  const db = firebase.firestore();
+const db = firebase.firestore();
   
-  const MoviesAdd = () => {
-    const [formData, setFormData] = useState({
-      title: '',
-      description: '',
-      director: '',
-      image: '',
-      rating: '',
-      year: '',
-      duration: ''
-    });
+const MoviesAdd = () => {
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    director: '',
+    image: '',
+    rating: '',
+    year: '',
+    duration: ''
+  });
   
-    const handleChange = (e) => {
-      setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
   
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      db.collection('movies').add(formData)
-        .then(() => {
-          console.log('Movie added successfully!');
-        })
-        .catch((error) => {
-          console.error('Error adding movie: ', error);
-        });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    db.collection('movies').add(formData)
+      .then(() => {
+        console.log('Movie added successfully!');
+      })
+      .catch((error) => {
+        console.error('Error adding movie: ', error);
+      });
     };
   
     return (
