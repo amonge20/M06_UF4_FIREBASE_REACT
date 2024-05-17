@@ -4,6 +4,7 @@ import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import firebaseConfig from '../config/config';
 import { Link } from 'react-router-dom';
 
+<<<<<<< HEAD
 //Inicialitza Firebase
 let app;
 if (!getApps().length) {
@@ -13,6 +14,13 @@ if (!getApps().length) {
 }
   
 const db = getFirestore(app);
+=======
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
+  
+const db = firebase.firestore();
+>>>>>>> 4bc696a0c2d756b2ec5cb1d767e022a4dfaf730b
   
 const MoviesAdd = () => {
   const [formData, setFormData] = useState({
@@ -29,6 +37,7 @@ const MoviesAdd = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   
+<<<<<<< HEAD
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -38,6 +47,18 @@ const MoviesAdd = () => {
       console.error('Error adding movie: ', error);
     }
   };
+=======
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    db.collection('movies').add(formData)
+      .then(() => {
+        console.log('Movie added successfully!');
+      })
+      .catch((error) => {
+        console.error('Error adding movie: ', error);
+      });
+    };
+>>>>>>> 4bc696a0c2d756b2ec5cb1d767e022a4dfaf730b
   
   return (
     <div>
