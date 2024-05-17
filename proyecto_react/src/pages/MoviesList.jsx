@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import firebase from 'firebase/app';
-import 'firebase/firestore';
+import { initializeApp, getApps, getApp } from 'firebase/app';
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
 import MovieCard from '../components/MovieCard';
 import firebaseConfig from '../config/config';
+import { Link } from 'react-router-dom';
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
+//Inicialitza Firebase
+let app;
+if (!getApps().length) {
+  app = initializeApp(firebaseConfig);
+} else {
+  app = getApp();
 }
 
-const db = firebase.firestore();
+const db = getFirestore(app);
 
 const MoviesList = () => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     const fetchMovies = async () => {
-      const snapshot = await db.collection('movies').get();
+      const snapshot = await getDocs(collection(db, 'movies'));
       const moviesData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       setMovies(moviesData);
     };
@@ -30,10 +35,12 @@ const MoviesList = () => {
           key={movie.id}
           title={movie.title}
           image={movie.image}
-          rate={movie.rating}
           direction={movie.director}
+          year={movie.year}
+          rate={movie.rating}
         />
       ))}
+      <Link to="/">Cancelar</Link>
     </div>
   );
 }

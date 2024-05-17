@@ -1,55 +1,81 @@
 import React, { useState } from 'react';
-import firebase from 'firebase/app';
-import 'firebase/firestore';
+import { initializeApp, getApps, getApp } from 'firebase/app';
+import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import firebaseConfig from '../config/config';
+import { Link } from 'react-router-dom';
 
-if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-  }
+//Inicialitza Firebase
+let app;
+if (!getApps().length) {
+  app = initializeApp(firebaseConfig);
+} else {
+  app = getApp();
+}
   
-  const db = firebase.firestore();
+const db = getFirestore(app);
   
-  const MoviesAdd = () => {
-    const [formData, setFormData] = useState({
-      title: '',
-      description: '',
-      director: '',
-      image: '',
-      rating: '',
-      year: '',
-      duration: ''
-    });
+const MoviesAdd = () => {
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    director: '',
+    image: '',
+    rating: '',
+    year: '',
+    duration: ''
+  });
   
-    const handleChange = (e) => {
-      setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
   
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      db.collection('movies').add(formData)
-        .then(() => {
-          console.log('Movie added successfully!');
-        })
-        .catch((error) => {
-          console.error('Error adding movie: ', error);
-        });
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await addDoc(collection(db, 'movies'), formData);
+      console.log('Movie added successfully!');
+    } catch (error) {
+      console.error('Error adding movie: ', error);
+    }
+  };
   
-    return (
-      <div>
-        <h2>Add Movie</h2>
-        <form onSubmit={handleSubmit}>
-          <input type="text" name="title" placeholder="Title" onChange={handleChange} />
-          <input type="text" name="description" placeholder="Description" onChange={handleChange} />
-          <input type="text" name="director" placeholder="Director" onChange={handleChange} />
-          <input type="text" name="image" placeholder="Image URL" onChange={handleChange} />
-          <input type="text" name="rating" placeholder="Rating" onChange={handleChange} />
-          <input type="text" name="year" placeholder="Year" onChange={handleChange} />
-          <input type="text" name="duration" placeholder="Duration" onChange={handleChange} />
-          <button type="submit">Add Movie</button>
-        </form>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <h2>Add Movie</h2>
+      <form onSubmit={handleSubmit}>
+        <div className='form-group'>
+          <label htmlFor="titulo">Titulo </label>
+          <input type="text" name="title" onChange={handleChange} />
+        </div>
+        <div className='form-group'>
+          <label htmlFor="descripcion">Descripcion </label>
+          <input type="text" name="descripcion" onChange={handleChange} />
+        </div>
+        <div className='form-group'>
+          <label htmlFor="director">Director </label>
+          <input type="text" name="title" onChange={handleChange} />
+        </div>
+        <div className='form-group'>
+          <label htmlFor="URL">Imagen URL </label>
+          <input type="text" name="URL" onChange={handleChange} />
+        </div>
+        <div className='form-group'>
+          <label htmlFor="valoracion">Valoración </label>
+          <input type="text" name="valoracion" onChange={handleChange} />
+        </div>
+        <div className='form-group'>
+          <label htmlFor="any">Año </label>
+          <input type="text" name="any" onChange={handleChange} />
+        </div>
+        <div className='form-group'>
+          <label htmlFor="duracion">Duración </label>
+          <input type="text" name="duracion" onChange={handleChange} />
+        </div>
+        <button type="submit">Añadir Pelicula</button>
+        <Link to="/">Cancelar</Link>
+      </form>
+    </div>
+  );
+}
   
-  export default MoviesAdd;
+export default MoviesAdd;

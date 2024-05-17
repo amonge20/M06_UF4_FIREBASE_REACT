@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Welcome from "./components/Welcome";
 import MoviesAdd from "./components/MoviesAdd";
 import MoviesList from "./pages/MoviesList";
 import IndexMenu from './pages/IndexMenu';
-import {Route, Router} from "react-router-dom";
+import './App.css'
 
-function App(){
+function App() {
   return (
-    <div>
-      <Router>
-        <switch>
-          <Route path='/welcome' element={<Welcome name="User"/>} />
-          <Route path='/movies/list' element={<MoviesList name="MoviesList" />} />
-          <Route path='/movies/add' element={<MoviesAdd name="MoviesAdd"  />} />
-        </switch>
-      </Router>
-    </div>
-    );
-  }
+    <Router>
+      <div>
+        <Routes>
+          <Route path="/" element={<IndexMenu />} />
+          <Route path="/welcome" element={<Welcome username="User" />} />
+          <Route path="/movies/list" element={<MoviesList />} />
+          <Route path="/movies/add" element={<MoviesAdd />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+}
 
 export default App;
