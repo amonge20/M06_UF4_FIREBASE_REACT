@@ -4,7 +4,6 @@ import Welcome from "./components/Welcome";
 import MoviesAdd from "./components/MoviesAdd";
 import MoviesList from "./pages/MoviesList";
 import IndexMenu from './pages/IndexMenu';
-import {Route, Router} from "react-router-dom";
 
 function App() {
   return (
