@@ -1,0 +1,58 @@
+.movies-add {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.movies-add .form-group {
+    margin-bottom: 15px;
+}
+
+.movies-add .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.movies-add .form-group input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.movies-add button {
+    display: inline-block;
+    padding: 13.8px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #28a745;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.movies-add button:hover {
+    background-color: #218838;
+}
+
+.movies-add .cancel-link {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #dc3545;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.2s;
+    float: right;
+}
+
+.movies-add .cancel-link:hover {
+    background-color: #c82333;
+}

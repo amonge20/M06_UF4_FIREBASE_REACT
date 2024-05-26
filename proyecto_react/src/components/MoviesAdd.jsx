@@ -3,6 +3,7 @@ import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import firebaseConfig from '../config/config';
 import { Link } from 'react-router-dom';
+import './styles/MoviesAdd.css';
 
 //Inicialitza Firebase
 let app;
@@ -40,8 +41,8 @@ const MoviesAdd = () => {
   };
   
   return (
-    <div>
-      <h2>Add Movie</h2>
+    <div className="movies-add">
+      <h2>Añadir Pelicula</h2>
       <form onSubmit={handleSubmit}>
         <div className='form-group'>
           <label htmlFor="titulo">Titulo </label>
@@ -49,30 +50,30 @@ const MoviesAdd = () => {
         </div>
         <div className='form-group'>
           <label htmlFor="descripcion">Descripcion </label>
-          <input type="text" name="descripcion" onChange={handleChange} />
+          <input type="text" name="description" onChange={handleChange} />
         </div>
         <div className='form-group'>
           <label htmlFor="director">Director </label>
-          <input type="text" name="title" onChange={handleChange} />
+          <input type="text" name="director" onChange={handleChange} />
         </div>
         <div className='form-group'>
           <label htmlFor="URL">Imagen URL </label>
-          <input type="text" name="URL" onChange={handleChange} />
+          <input type="text" name="image" onChange={handleChange} />
         </div>
         <div className='form-group'>
           <label htmlFor="valoracion">Valoración </label>
-          <input type="text" name="valoracion" onChange={handleChange} />
+          <input type="text" name="rating" onChange={handleChange} />
         </div>
         <div className='form-group'>
           <label htmlFor="any">Año </label>
-          <input type="text" name="any" onChange={handleChange} />
+          <input type="text" name="year" onChange={handleChange} />
         </div>
         <div className='form-group'>
           <label htmlFor="duracion">Duración </label>
-          <input type="text" name="duracion" onChange={handleChange} />
+          <input type="text" name="duration" onChange={handleChange} />
         </div>
         <button type="submit">Añadir Pelicula</button>
-        <Link to="/">Cancelar</Link>
+        <Link to="/" className="cancel-link">Volver</Link> 
       </form>
     </div>
   );
